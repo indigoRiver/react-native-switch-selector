@@ -135,6 +135,7 @@ export default class SwitchSelector extends Component {
       height,
       bold
     } = this.props;
+    console.log(selectedColor)
 
     const options = this.props.options.map((element, index) => (
       <View
@@ -201,8 +202,6 @@ export default class SwitchSelector extends Component {
                       height: hasPadding ? height - 4 : height,
                       padding: 10,
                       backgroundColor: this.getBgColor(),
-
-
                       borderWidth: 1,
                       borderRadius: 2,
                       borderColor: '#ddd',
@@ -211,10 +210,6 @@ export default class SwitchSelector extends Component {
                       shadowOffset: { width: 0, height: 2 },
                       shadowOpacity: 0.8,
                       shadowRadius: 2,
-                      elevation: 1,
-
-
-
                       width: this.state.sliderWidth /
                         this.props.options.length -
                         (hasPadding ? valuePadding : 0),
@@ -246,7 +241,7 @@ export default class SwitchSelector extends Component {
 
 SwitchSelector.defaultProps = {
   textColor: '#000000',
-  selectedColor: '#FFFFFF',
+  selectedColor: 'red',
   fontSize: 12,
   backgroundColor: '#FFFFFF',
   borderColor: '#C9C9C9',
