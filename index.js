@@ -135,7 +135,6 @@ export default class SwitchSelector extends Component {
       height,
       bold
     } = this.props;
-    console.log(selectedColor)
 
     const options = this.props.options.map((element, index) => (
       <View
@@ -144,7 +143,7 @@ export default class SwitchSelector extends Component {
         <TouchableOpacity
           style={styles.button}
           onPress={() => this.toggleItem(index)}>
-          {typeof element.customIcon === 'function'
+          {/* {typeof element.customIcon === 'function'
             ? element.customIcon(this.state.selected == index)
             : element.customIcon}
           {element.imageIcon &&
@@ -157,10 +156,10 @@ export default class SwitchSelector extends Component {
                   ? selectedColor
                   : textColor
               }}
-            />}
+            />} */}
           <Text
             style={{
-              fontSize,
+              fontSize: 10,
               fontWeight: bold ? 'bold' : 'normal',
               textAlign: 'center',
               color: this.state.selected == index ? selectedColor : textColor,
@@ -184,7 +183,7 @@ export default class SwitchSelector extends Component {
             onLayout={event => {
               const { width } = event.nativeEvent.layout;
               this.setState({
-                sliderWidth: width - (hasPadding ? valuePadding : 0),
+                sliderWidth: width - (hasPadding ? valuePadding : 0) + 5,
               });
             }}>
             <View
@@ -210,9 +209,13 @@ export default class SwitchSelector extends Component {
                       shadowOffset: { width: 0, height: 2 },
                       shadowOpacity: 0.8,
                       shadowRadius: 2,
+                      elevation: 1,
+
+
+
                       width: this.state.sliderWidth /
                         this.props.options.length -
-                        (hasPadding ? valuePadding : 0),
+                        (hasPadding ? valuePadding : 0) + 5,
                       transform: [
                         {
                           translateX: this.animatedValue.interpolate({
@@ -220,7 +223,7 @@ export default class SwitchSelector extends Component {
                             outputRange: [
                               hasPadding ? valuePadding : 0,
                               this.state.sliderWidth -
-                                (hasPadding ? valuePadding : 0)
+                                (hasPadding ? valuePadding : 0) - 12
                             ],
                           }),
                         },
@@ -229,7 +232,7 @@ export default class SwitchSelector extends Component {
                     },
                     styles.animated
                   ]}
-                />}
+                >{options}</Animated.View>}
               {options}
             </View>
           </View>
@@ -241,7 +244,7 @@ export default class SwitchSelector extends Component {
 
 SwitchSelector.defaultProps = {
   textColor: '#000000',
-  selectedColor: 'red',
+  selectedColor: '#FFFFFF',
   fontSize: 12,
   backgroundColor: '#FFFFFF',
   borderColor: '#C9C9C9',
