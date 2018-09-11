@@ -7,7 +7,8 @@ import {
   Easing,
   Image,
   I18nManager,
-  PanResponder
+  PanResponder,
+  Platform
 } from 'react-native';
 
 const styles = {
@@ -183,10 +184,15 @@ export default class SwitchSelector extends Component {
             onLayout={event => {
               const { width } = event.nativeEvent.layout;
               this.setState({
-                sliderWidth: width - (hasPadding ? valuePadding : 0) + 5,
+                sliderWidth: Platform.OS == 'android' ? width - (hasPadding ? valuePadding : 0) + 2 : width - (hasPadding ? valuePadding : 0)
               });
             }}>
             <View
+
+
+
+
+
               style={{
                 flex: 1,
                 flexDirection: 'row',
@@ -213,17 +219,29 @@ export default class SwitchSelector extends Component {
 
 
 
-                      width: this.state.sliderWidth /
+                      width: Platform.OS == 'android' ? this.state.sliderWidth /
                         this.props.options.length -
-                        (hasPadding ? valuePadding : 0) + 5,
-                      transform: [
+                        (hasPadding ? valuePadding : 0) + 2 : this.state.sliderWidth /
+                        this.props.options.length -
+                        (hasPadding ? valuePadding : 0),
+                      transform: [     
+
+
+
+
+
+
                         {
                           translateX: this.animatedValue.interpolate({
                             inputRange: [0, 1],
-                            outputRange: [
+                            outputRange: Platform.OS == 'android' ? [
                               hasPadding ? valuePadding : 0,
                               this.state.sliderWidth -
-                                (hasPadding ? valuePadding : 0) - 12
+                                (hasPadding ? valuePadding : 0) - 15
+                            ] : [
+                              hasPadding ? valuePadding : 0,
+                              this.state.sliderWidth -
+                                (hasPadding ? valuePadding : 0) 
                             ],
                           }),
                         },
